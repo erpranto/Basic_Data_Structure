@@ -64,13 +64,23 @@ void insert_at_tail(Node *&head, Node *&tail, int val)
     tail = tail->next;
 }
 
-void insert_at_any_position(Node *&head, int idx, int val)
+void insert_at_any_position(Node *&head, Node *&tail, int idx, int val)
 {
+    if (idx == 0)
+    {
+        insert_at_head(head, tail, val);
+        return;
+    }
     Node *newnode = new Node(val);
     Node *tmp = head;
     for (int i = 0; i < idx - 1; i++)
     {
         tmp = tmp->next;
+    }
+    if (tmp->next == NULL)
+    {
+        insert_at_tail(head, tail, val);
+        return;
     }
     newnode->next = tmp->next;
     tmp->next->prev = newnode;
@@ -106,12 +116,22 @@ void delete_at_tail(Node *&head, Node *&tail)
 
 void delete_at_any_position(Node *&head, Node *&tail, int idx)
 {
+    if (idx == 0)
+    {
+        delete_at_head(head, tail);
+        return;
+    }
     Node *tmp = head;
     for (int i = 0; i < idx - 1; i++)
     {
         tmp = tmp->next;
     }
     Node *deletenode = tmp->next;
+    if (deletenode->next == NULL)
+    {
+        delete_at_tail(head, tail);
+        return;
+    }
     tmp->next = tmp->next->next;
     tmp->next->prev = tmp;
     delete deletenode;
