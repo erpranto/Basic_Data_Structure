@@ -1,4 +1,2 @@
-Wrong Index
-10
-20
-30
+In Fun0x61fe40
+IN Main Fun0x61fe40
