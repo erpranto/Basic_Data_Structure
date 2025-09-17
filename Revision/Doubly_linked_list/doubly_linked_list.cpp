@@ -137,6 +137,14 @@ void delete_at_any_position(Node *&head, Node *&tail, int idx)
     delete deletenode;
 }
 
+void reverse_doubly_linked_list(Node *&head, Node *&tail)
+{
+    for (Node *i = head, *j = tail; i != j && i->prev != j; i = i->next, j = j->prev)
+    {
+        swap(i->val, j->val);
+    }
+}
+
 int main()
 {
     Node *head = NULL;
@@ -150,6 +158,7 @@ int main()
         }
         insert_at_tail(head, tail, val);
     }
+    reverse_doubly_linked_list(head, tail);
     print_forward(head);
     return 0;
 }
